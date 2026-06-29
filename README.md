@@ -1,21 +1,6 @@
-# Mini-Loyiha-6-Div-Layout-Bugatti-
+Mana berilgan yangi talablar asosida elementlarni position yordamida ustma-ust joylashtirish, doira shaklidagi profil rasmi, ikonkalarni joylashuvi va z-index boshqaruvi aks etgan to'liq kod strukturasi.
 
-Conversation with Gemini
- Требования
-
-✅ <div> larni to'g'ri tuzilmada joylashtiring
-
-✅ Fon rangi yoki gradient
-
-✅ Shrift va matn rangini belgilang
-
-✅ Rasmni CSS bilan boshqaring (max-width, object-fit)
-
-✅ margin va padding
-
-✅ Hover effekti
-
-Mana berilgan talablarga to'liq javob beradigan, toza va zamonaviy tuzilmaga ega HTML va CSS kodlari. Bu misolda chiroyli rasm kartasi (Card component) yaratilgan:
+Bu misolda foydalanuvchi profil kartasi (Profile Card) yaratilgan:
 
 1. HTML Tuzilmasi (index.html)
 HTML
@@ -24,23 +9,29 @@ HTML
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zamonaviy Karta</title>
+    <title>Profil Karta</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="card-container">
+    <div class="profile-card">
         
-        <div class="card-image-wrapper">
-            <img src="https://picsum.photos/600/400" alt="Tabiat rasmi" class="card-img">
+        <div class="card-badge">VIP</div>
+
+        <div class="avatar-container">
+            <img src="https://i.pravatar.cc/150?img=33" alt="Profil rasmi" class="profile-avatar">
         </div>
         
-        <div class="card-content">
-            <h2 class="card-title">Gofret va Sayohat</h2>
-            <p class="card-text">
-                Ushbu karta zamonaviy CSS metodlari yordamida yaratildi. Hover effekti, to'g'ri padding va margin o'lchamlari hamda chiroyli gradient fonga ega.
-            </p>
-            <button class="card-btn">Batafsil</button>
+        <div class="profile-info">
+            <h3 class="profile-name">Anvar Aliyev</h3>
+            <p class="profile-job">Full-Stack Dasturchi</p>
+        </div>
+
+        <div class="social-icons">
+            <a href="#" class="icon-link"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="icon-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="icon-link"><i class="fab fa-github"></i></a>
         </div>
 
     </div>
@@ -49,9 +40,6 @@ HTML
 </html>
 2. CSS Stil Formati (style.css)
 CSS
-/* Umumiy sozlamalar va Shrift */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -59,110 +47,119 @@ CSS
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* Fon uchun chiroyli gradient */
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Gradient fon */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Karta konteyneri */
-.card-container {
+/* Profil kartasi - Asosiy konteyner */
+.profile-card {
+    position: relative; /* Ichki absolute elementlar uchun asos bo'ladi */
+    width: 300px;
+    height: 380px;
     background-color: #ffffff;
-    border-radius: 15px;
-    overflow: hidden;
-    max-width: 350px;
-    width: 100%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    
-    /* Margin: kartani atrofdan masofalash uchun */
-    margin: 20px; 
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
     
     /* Hover effekti uchun silliq o'tish */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Rasm qismi (CSS bilan boshqarish) */
-.card-image-wrapper {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
+/* Hover: Element biroz yuqoriga ko'tariladi */
+.profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-.card-img {
-    width: 100%;
-    height: 100%;
-    max-width: 100%; /* Rasmni CSS bilan chegaralash */
-    object-fit: cover; /* Rasm cho'zilib ketmasligi uchun */
-    transition: transform 0.5s ease;
+/* Ustma-ust qo'yish va z-index boshqaruvi (Karta burchagidagi nishon) */
+.card-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%); /* Gradient fon */
+    color: white;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 20px;
+    z-index: 10; /* Rasm va matnlardan ustki qavatda turishi uchun */
 }
 
-/* Matn qismi va Padding */
-.card-content {
-    padding: 25px; /* Ichki masofa */
+/* Profil rasmi konteyneri */
+.avatar-container {
+    margin-top: 20px;
+    margin-bottom: 15px;
 }
 
-/* Shrift va matn ranglari */
-.card-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #2d3748; /* To'q rangli matn */
-    margin-bottom: 12px; /* Pastki masofa */
+/* Profil rasmi doira shaklida */
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Rasmni mukammal doira qiladi */
+    object-fit: cover;
+    border: 4px solid #f0f2f5;
 }
 
-.card-text {
-    font-size: 0.95rem;
-    color: #718096; /* Ochroq matn rangi */
-    line-height: 1.6;
-    margin-bottom: 20px;
+/* Matnlar stili */
+.profile-name {
+    color: #2c3e50;
+    font-size: 22px;
+    margin-bottom: 5px;
 }
 
-/* Tugma stili */
-.card-btn {
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.profile-job {
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+/* Ikonkalarni pastga absolute bilan joylashtirish */
+.social-icons {
+    position: absolute;
+    bottom: 25px; /* Kartaning pastki qismidan masofa */
+    left: 0;
+    width: 100%; /* Ikonkalarni o'rtaga tekislash uchun kenglik */
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Ikonkalar orasidagi masofa */
+    z-index: 5;
+}
+
+/* Ikonka havolalari stili */
+.icon-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #f1f2f6;
+    color: #2c3e50;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+/* Ikonkaga alohida hover bo'lgandagi effekt */
+.icon-link:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Hoverda gradient */
     color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s ease;
+    transform: translateY(-2px);
 }
+Kod qanday ishlamoqda (Talablar ijrosi):
+position: relative va absolute: .profile-card elementiga relative berildi. Uning ichidagi .card-badge va .social-icons esa absolute orqali kartaning istalgan burchagiga mustaqil joylashtirildi.
 
-/* --- Hover Effektlari --- */
+Profil rasmi doira shaklida: .profile-avatar klassiga border-radius: 50% berilib, rasm to'liq aylana shakliga keltirildi.
 
-/* Kartaning o'ziga hover bo'lganda */
-.card-container:hover {
-    transform: translateY(-10px); /* Tepaga biroz ko'tariladi */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-}
+Ikonkalar joylashuvi: .social-icons bloki position: absolute; bottom: 25px; yordamida kartaning eng pastki qismiga mahkamlandi.
 
-/* Karta ustiga borganda rasmning yaqinlashishi */
-.card-container:hover .card-img {
-    transform: scale(1.1);
-}
+Hover effekti: Asosiy kartaga sichqoncha olib borilganda .profile-card:hover orqali transform: translateY(-4px) finti bajarilib, karta silliq ko'tariladi.
 
-/* Tugmaga alohida hover */
-.card-btn:hover {
-    opacity: 0.9;
-}
-Kod qanday talablarni bajardi:
-divlar mantiqiy ravishda card-container → card-image-wrapper va card-content qismlariga ajratildi.
+z-index boshqaruvi: .card-badge elementiga z-index: 10 berildi, bu uning har qanday holatda boshqa kontentlardan ustki qavatda (oldinda) ko'rinishini ta'minlaydi.
 
-body qismida zamonaviy binafsha-ko'k gradient ishlatildi.
-
-Google Fonts orqali Poppins shrifti ulandi, sarlavha va matnga alohida ranglar berildi.
-
-Rasm uchun max-width: 100% va object-fit: cover xususiyatlari qo'llanildi.
-
-margin va padding o'lchamlari elementlar siqilib qolmasligi uchun to'g'ri taqsimlandi.
-
-.card-container:hover orqali karta yuqoriga siljiydi, soyasi kattalashadi va ichidagi rasm biroz yaqinlashadi (scale).
-
-
-
-
-Gemini isn’t human. It can make mistakes, so double-check it.
-
+Gradient fon: Ham body foniga, ham karta ichidagi kichik tugma (.card-badge) va ikonka hoverlariga chiroyli rangli gradientlar berildi.
